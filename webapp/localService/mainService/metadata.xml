@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ZQMM_C_Equip_BarcodeTRType">
+                <Key>
+                    <PropertyRef Name="Equipment"/>
+                </Key>
+                <Property Name="Equipment" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="EquipmentTrim" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="EquipmentName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="EquipmentCategory" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="EquipmentCategoryDesc" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="TechnicalObjectType" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="TechnicalObjectTypeDesc" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="DivisionName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="StorageLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="StorageLocationName" Type="Edm.String" Nullable="false" MaxLength="16"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="MaterialName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MaintObjectInternalID" Type="Edm.String" Nullable="false" MaxLength="22"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="SupplierName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedByName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="CreationDate" Type="Edm.Date"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ChangedByName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="LastChangeDate" Type="Edm.Date"/>
+                <Property Name="AcquisitionDate" Type="Edm.Date"/>
+                <Property Name="AcquisitionValue" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="Manufacturer" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ModelNumber" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ManufacturerCountry" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ManufacturerSerialNumber" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="PartNumber" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="GrossWeightUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="SizeOrDimensionText" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="FunctionalLocation" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="FunctionalLocationName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CostCenterName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="MaintPlant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="LocationName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="SortField" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="StatusCode" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="StatusName" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="StatusCriticality" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="StatusProfile" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="EquipmentImageUrl" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.EntityControl"/>
+                <Property Name="__OperationControl" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTROperationControl"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="_ChangeDoc" Type="Collection(com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_ChangeDocumentType)"/>
+            </EntityType>
+            <EntityType Name="ZQMM_C_Equip_ChangeDocumentType">
+                <Key>
+                    <PropertyRef Name="ChangeDocObject"/>
+                    <PropertyRef Name="ChangeDocument"/>
+                    <PropertyRef Name="DatabaseTable"/>
+                    <PropertyRef Name="ChangeDocDatabaseTableField"/>
+                    <PropertyRef Name="ChangeDocItemChangeType"/>
+                    <PropertyRef Name="CreationDateTime"/>
+                    <PropertyRef Name="ChangeDocTableKey"/>
+                </Key>
+                <Property Name="ChangeDocObject" Type="Edm.String" Nullable="false" MaxLength="90"/>
+                <Property Name="ChangeDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="DatabaseTable" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ChangeDocDatabaseTableField" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ChangeDocItemChangeType" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Nullable="false"/>
+                <Property Name="ChangeDocTableKey" Type="Edm.String" Nullable="false" MaxLength="70"/>
+                <Property Name="FieldName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ChangeTypeDesc" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="MaintObjectChangeTypeCode" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="MaintObjectChangeTypeCodeText" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="TechnicalObjectDescription" Type="Edm.String" Nullable="false" MaxLength="200"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="UserDescription" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="CreationDate" Type="Edm.Date"/>
+                <Property Name="CreationTime" Type="Edm.TimeOfDay" Nullable="false"/>
+                <Property Name="ChangeDocNewFieldValue" Type="Edm.String" Nullable="false" MaxLength="254"/>
+                <Property Name="ChangeDocPreviousFieldValue" Type="Edm.String" Nullable="false" MaxLength="254"/>
+                <Property Name="TechObjChgDocNewFldValueText" Type="Edm.String" Nullable="false" MaxLength="254"/>
+                <Property Name="TechObjChgDocOldFldValueText" Type="Edm.String" Nullable="false" MaxLength="254"/>
+                <Property Name="ChangeDocObjectClass" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="CharcDescription" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Class" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="StatusName" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="StatusProfile" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="StatusIsInactive" Type="Edm.String" Nullable="false" MaxLength="1"/>
+            </EntityType>
+            <ComplexType Name="ZQMM_C_Equip_BarcodeTROperationControl">
+                <Property Name="createAuditDoc" Type="Edm.Boolean" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="EntityControl">
+                <Property Name="Updatable" Type="Edm.Boolean" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__Message">
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" Nullable="false"/>
+                <Property Name="target" Type="Edm.String"/>
+                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
+                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="longtextUrl" Type="Edm.String"/>
+            </ComplexType>
+            <Action Name="createAuditDoc" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
+                <ReturnType Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
+            </Action>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ZQMM_C_Equip_BarcodeTR" EntityType="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType">
+                    <NavigationPropertyBinding Path="_ChangeDoc" Target="ZQMM_C_Equip_ChangeDocument"/>
+                </EntitySet>
+                <EntitySet Name="ZQMM_C_Equip_ChangeDocument" EntityType="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_ChangeDocumentType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Equipment">
+                <Annotation Term="SAP__common.Text" Path="EquipmentName"/>
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Equipment"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Equipment Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/EquipmentTrim">
+                <Annotation Term="SAP__common.Label" String="Asset No."/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/EquipmentName">
+                <Annotation Term="SAP__common.Label" String="Description"/>
+                <Annotation Term="SAP__common.Heading" String="Description of technical object"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Description of technical object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/EquipmentCategory">
+                <Annotation Term="SAP__common.Label" String="Category"/>
+                <Annotation Term="SAP__common.Text" Path="EquipmentCategoryDesc"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="C"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Equipment category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/TechnicalObjectType">
+                <Annotation Term="SAP__common.Text" Path="TechnicalObjectTypeDesc"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Object Type"/>
+                <Annotation Term="SAP__common.Heading" String="ObjectType"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Type of Technical Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/TechnicalObjectTypeDesc">
+                <Annotation Term="SAP__common.Label" String="Object Type Text"/>
+                <Annotation Term="SAP__common.Heading" String="Object type text"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Text for Object Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Plant">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Division">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Division"/>
+                <Annotation Term="SAP__common.Heading" String="Dv"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StorageLocation">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Storage Location"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Material">
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.Text" Path="MaterialName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/MaintObjectInternalID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Object number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Customer">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Current customer"/>
+                <Annotation Term="SAP__common.Heading" String="CurCustomer"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Customer to Whom Serial Number was Delivered"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Supplier">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Vendor"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Vendor number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CreatedByUser">
+                <Annotation Term="SAP__common.Label" String="Created By"/>
+                <Annotation Term="SAP__common.Text" Path="CreatedByName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zqap_i_user/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.et-zqmm_c_equip_barcodetr.createdbyuser'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Created By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Person Responsible for Creating the Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CreatedByName">
+                <Annotation Term="SAP__common.Label" String="Created By Name"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__common.Heading" String="Full Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Full Name of Person"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CreationDate">
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.Heading" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Record Creation Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/LastChangedByUser">
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Text" Path="ChangedByName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Person Who Changed Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/LastChangeDate">
+                <Annotation Term="SAP__common.Label" String="Last Changes On"/>
+                <Annotation Term="SAP__common.Heading" String="Chngd On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/AcquisitionDate">
+                <Annotation Term="SAP__common.Label" String="Acquisition Date"/>
+                <Annotation Term="SAP__common.Heading" String="Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Acquisition date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/AcquisitionValue">
+                <Annotation Term="SAP__common.Label" String="Acquisition Value"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Acquisition Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Acquisition Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Currency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Currency Key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Manufacturer">
+                <Annotation Term="SAP__common.Label" String="Manufacturer"/>
+                <Annotation Term="SAP__common.Heading" String="Manufacturer of Asset"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturer of Asset"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/ModelNumber">
+                <Annotation Term="SAP__common.Label" String="Model #"/>
+                <Annotation Term="SAP__common.Heading" String="Model number"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturer model number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/ManufacturerCountry">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Mfr Ctry/Reg"/>
+                <Annotation Term="SAP__common.Heading" String="M C/R"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Country/Region of Manufacture"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/ManufacturerSerialNumber">
+                <Annotation Term="SAP__common.Label" String="S/N #"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Manufacturer's Serial Number"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturer's Serial Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/PartNumber">
+                <Annotation Term="SAP__common.Label" String="Part #"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Manufacturer part number"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturer part number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/GrossWeight">
+                <Annotation Term="SAP__measures.Unit" Path="GrossWeightUnit"/>
+                <Annotation Term="SAP__common.Label" String="Weight of object"/>
+                <Annotation Term="SAP__common.Heading" String="Weight"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/GrossWeightUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Unit of weight"/>
+                <Annotation Term="SAP__common.Heading" String="Un."/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/SizeOrDimensionText">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Purchase Doc"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/FunctionalLocation">
+                <Annotation Term="SAP__common.Label" String="Functional Location"/>
+                <Annotation Term="SAP__common.Text" Path="FunctionalLocationName"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CostCenter">
+                <Annotation Term="SAP__common.Label" String="Cost Center"/>
+                <Annotation Term="SAP__common.Text" Path="CostCenterName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_costcenterstdvh/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.et-zqmm_c_equip_barcodetr.costcenter'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Cost Center"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/MaintPlant">
+                <Annotation Term="SAP__common.Text" Path="PlantName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.et-zqmm_c_equip_barcodetr.maintplant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Maintenance Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/Location">
+                <Annotation Term="SAP__common.Text" Path="LocationName"/>
+                <Annotation Term="SAP__common.ValueListForValidation" String=""/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zqmm_i_location/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.et-zqmm_c_equip_barcodetr.location'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Location"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Location of maintenance object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/SortField">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Sort Field"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StatusCode">
+                <Annotation Term="SAP__common.Label" String="Status"/>
+                <Annotation Term="SAP__common.Text" Path="StatusName">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StatusProfile">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status Profile"/>
+                <Annotation Term="SAP__common.Heading" String="StatProf"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/__OperationControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZQMM_C_Equip_BarcodeTR">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_ChangeDoc"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="CreationDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="AcquisitionDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.createAuditDoc(SAP__self.ZQMM_C_Equip_BarcodeTRType)">
+                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/createAuditDoc"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType">
+                <Annotation Term="SAP__common.Label" String="Equipment Audit Barcode projection"/>
+                <Annotation Term="SAP__UI.DataPoint" Qualifier="dpAcDate">
+                    <Record>
+                        <PropertyValue Property="Value" Path="AcquisitionDate"/>
+                        <PropertyValue Property="Title" String="Acquisition Date"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.DataPoint" Qualifier="dpAcValue">
+                    <Record>
+                        <PropertyValue Property="Value" Path="AcquisitionValue"/>
+                        <PropertyValue Property="Title" String="Acquisition Value"/>
+                        <PropertyValue Property="Criticality" Path="StatusCriticality"/>
+                        <PropertyValue Property="CriticalityRepresentation" EnumMember="SAP__UI.CriticalityRepresentationType/WithoutIcon"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.DataPoint" Qualifier="dpStatus">
+                    <Record>
+                        <PropertyValue Property="Value" Path="StatusCode"/>
+                        <PropertyValue Property="Title" String="Status"/>
+                        <PropertyValue Property="Criticality" Path="StatusCriticality"/>
+                        <PropertyValue Property="CriticalityRepresentation" EnumMember="SAP__UI.CriticalityRepresentationType/WithoutIcon"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Equipment Information"/>
+                            <PropertyValue Property="ID" String="colGeneralInfo"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="SAP__UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Basic Info"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification#idBasicInfo"/>
+                                    </Record>
+                                    <Record Type="SAP__UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Location Info"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification#idLocationInfo"/>
+                                    </Record>
+                                    <Record Type="SAP__UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Admin Data"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification#idAdmin"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Manufacturing Info"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification#idMfgInfo"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Audit History Data"/>
+                            <PropertyValue Property="ID" String="AuditHistoryTable"/>
+                            <PropertyValue Property="Target" AnnotationPath="_ChangeDoc/@SAP__UI.LineItem"/>
+                            <Annotation Term="SAP__UI.PartOfPreview" Bool="true"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#fgHeaderEquip"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadStatus"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpStatus"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadAcDate"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadAcValue"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcValue"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="fgHeaderEquip">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="EquipmentTrim"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="EquipmentName"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="TechnicalObjectType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Equipment"/>
+                        <PropertyValue Property="TypeNamePlural" String="Equipments"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Label" String="Equipment #"/>
+                                <PropertyValue Property="IconUrl" String="sap-icon://alert"/>
+                                <PropertyValue Property="Value" Path="Equipment"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="EquipmentName"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification" Qualifier="idAdmin">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedByUser"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreationDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedByUser"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangeDate"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification" Qualifier="idBasicInfo">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Asset #"/>
+                            <PropertyValue Property="Value" Path="EquipmentTrim"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EquipmentName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EquipmentCategory"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Criticality" Path="StatusCriticality"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="SAP__UI.CriticalityRepresentationType/WithIcon"/>
+                            <PropertyValue Property="Value" Path="StatusCode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCenter"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification" Qualifier="idLocationInfo">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TechnicalObjectType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="FunctionalLocation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintPlant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Location"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="SortField"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification" Qualifier="idMfgInfo">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Manufacturer"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ModelNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ManufacturerSerialNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="PartNumber"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataFieldForAction">
+                            <PropertyValue Property="Label" String="Add Audit Record"/>
+                            <PropertyValue Property="Action" String="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.createAuditDoc(com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType)"/>
+                            <PropertyValue Property="InvocationGrouping" EnumMember="SAP__UI.OperationGroupingType/Isolated"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EquipmentName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Criticality" Path="StatusCriticality"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="SAP__UI.CriticalityRepresentationType/WithoutIcon"/>
+                            <PropertyValue Property="Value" Path="StatusCode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EquipmentCategory"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AcquisitionDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AcquisitionValue"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreationDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedByUser"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>EquipmentTrim</PropertyPath>
+                        <PropertyPath>Location</PropertyPath>
+                        <PropertyPath>MaintPlant</PropertyPath>
+                        <PropertyPath>EquipmentCategory</PropertyPath>
+                        <PropertyPath>CostCenter</PropertyPath>
+                        <PropertyPath>AcquisitionDate</PropertyPath>
+                        <PropertyPath>FunctionalLocation</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionVariant" Qualifier="catCapital">
+                    <Record>
+                        <PropertyValue Property="Text" String="Capital Asset"/>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="SAP__UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="EquipmentCategory"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="SAP__UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="SAP__UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="SAP__UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="C"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionVariant" Qualifier="catGeneral">
+                    <Record>
+                        <PropertyValue Property="Text" String="General"/>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="SAP__UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="EquipmentCategory"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="SAP__UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="SAP__UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="SAP__UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="G"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionVariant" Qualifier="catLow">
+                    <Record>
+                        <PropertyValue Property="Text" String="Low Value"/>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="SAP__UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="EquipmentCategory"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="SAP__UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="SAP__UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="SAP__UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="L"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Communication.Contact">
+                    <Record>
+                        <PropertyValue Property="fn" Path="CreatedByName"/>
+                        <PropertyValue Property="adr">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="type" EnumMember="Communication.ContactInformationType/preferred"/>
+                                    <PropertyValue Property="country" Path="ManufacturerCountry"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Communication.Address" Qualifier="pref">
+                    <Record>
+                        <PropertyValue Property="type" EnumMember="Communication.ContactInformationType/preferred"/>
+                        <PropertyValue Property="country" Path="ManufacturerCountry"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocObject">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Object Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocument">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Document Number"/>
+                <Annotation Term="SAP__common.Heading" String="Doc.Number"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Change Number of Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/DatabaseTable">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Table Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocDatabaseTableField">
+                <Annotation Term="SAP__common.Text" Path="FieldName">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Field Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocItemChangeType">
+                <Annotation Term="SAP__common.Label" String="Activity"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity"/>
+                <Annotation Term="SAP__common.Text" Path="ChangeTypeDesc">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Change Indicator"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/CreationDateTime">
+                <Annotation Term="SAP__common.Label" String="Edited On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Edited On"/>
+                <Annotation Term="SAP__common.Heading" String="Short Form of Time Stamp"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocTableKey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Table Key"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Changed table record key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/MaintObjectChangeTypeCode">
+                <Annotation Term="SAP__common.Label" String="Edit Type"/>
+                <Annotation Term="SAP__common.Text" Path="MaintObjectChangeTypeCodeText">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/MaintObjectChangeTypeCodeText">
+                <Annotation Term="SAP__common.Label" String="Edit Type Text"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Edit Type Text"/>
+                <Annotation Term="SAP__common.Heading" String="Short Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/TechnicalObjectDescription">
+                <Annotation Term="SAP__common.Label" String="Short Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/CreatedByUser">
+                <Annotation Term="SAP__common.Label" String="Edited By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Edited By"/>
+                <Annotation Term="SAP__common.Text" Path="UserDescription">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/UserDescription">
+                <Annotation Term="SAP__common.Label" String="Edited By Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Edited By Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocNewFieldValue">
+                <Annotation Term="SAP__common.Label" String="New Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="New Value"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="New Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocPreviousFieldValue">
+                <Annotation Term="SAP__common.Label" String="Old Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Old Value"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Old Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/TechObjChgDocNewFldValueText">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="New Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="New Content of Changed Field"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/TechObjChgDocOldFldValueText">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Old Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Old Content of Changed Field"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeDocObjectClass">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Change Doc. Object"/>
+                <Annotation Term="SAP__common.Heading" String="Object"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Object class"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/Class">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Class"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Class number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/StatusProfile">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status Profile"/>
+                <Annotation Term="SAP__common.Heading" String="StatProf"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/StatusIsInactive">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status inactive"/>
+                <Annotation Term="SAP__common.Heading" String="I"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Indicator: Status Is Inactive"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType">
+                <Annotation Term="SAP__common.Label" String="Equipment Audit Change Doc Projection"/>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintObjectChangeTypeCode"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TechnicalObjectDescription"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocument"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="DatabaseTable"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocDatabaseTableField"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocItemChangeType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreationDateTime"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocTableKey"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintObjectChangeTypeCode"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TechnicalObjectDescription"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedByUser"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocNewFieldValue"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocPreviousFieldValue"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ChangeDocObjectClass"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CharcDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Class"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StatusName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StatusProfile"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StatusIsInactive"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="SAP__common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="CreationDateTime"/>
+                                    <PropertyValue Property="Descending" Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequestAtLeast">
+                            <Collection>
+                                <PropertyPath>CreatedByUser</PropertyPath>
+                                <PropertyPath>CharcDescription</PropertyPath>
+                                <PropertyPath>Class</PropertyPath>
+                                <PropertyPath>StatusIsInactive</PropertyPath>
+                                <PropertyPath>StatusName</PropertyPath>
+                                <PropertyPath>StatusProfile</PropertyPath>
+                                <PropertyPath>ChangeDocObjectClass</PropertyPath>
+                                <PropertyPath>CreationDateTime</PropertyPath>
+                                <PropertyPath>CreatedByUser</PropertyPath>
+                                <PropertyPath>ChangeDocItemChangeType</PropertyPath>
+                                <PropertyPath>MaintObjectChangeTypeCode</PropertyPath>
+                                <PropertyPath>ChangeDocDatabaseTableField</PropertyPath>
+                                <PropertyPath>DatabaseTable</PropertyPath>
+                                <PropertyPath>ChangeDocument</PropertyPath>
+                                <PropertyPath>ChangeDocObject</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ChangeDocObject</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZQMM_C_Equip_ChangeDocument">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StatusName">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StatusCriticality">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/CreationDate">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Creation Date of Change Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/CreationTime">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Time"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Time of Change"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/EquipmentCategoryDesc">
+                <Annotation Term="SAP__common.Label" String="Equipment CatDesc."/>
+                <Annotation Term="SAP__common.Heading" String="Equipment category description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Equipment category description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/DivisionName">
+                <Annotation Term="SAP__common.Label" String="Division Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/StorageLocationName">
+                <Annotation Term="SAP__common.Label" String="Storage Loc. Name"/>
+                <Annotation Term="SAP__common.Heading" String="Storage Location Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Storage Location Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/MaterialName">
+                <Annotation Term="SAP__common.Label" String="Material Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CustomerName">
+                <Annotation Term="SAP__common.Label" String="Name of Customer"/>
+                <Annotation Term="SAP__common.Heading" String="Customer"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/SupplierName">
+                <Annotation Term="SAP__common.Label" String="Name of Supplier"/>
+                <Annotation Term="SAP__common.Heading" String="Supplier"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/ChangedByName">
+                <Annotation Term="SAP__common.Label" String="Full Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Full Name of Person"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/CostCenterName">
+                <Annotation Term="SAP__common.Label" String="Cost Center Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/PlantName">
+                <Annotation Term="SAP__common.Label" String="Plant Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/LocationName">
+                <Annotation Term="SAP__common.Label" String="Location Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/__EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/__OperationControl/createAuditDoc">
+                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/FieldName">
+                <Annotation Term="SAP__common.Label" String="Long field label"/>
+                <Annotation Term="SAP__common.Heading" String="Long Field Label"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Long Field Label"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/ChangeTypeDesc">
+                <Annotation Term="SAP__common.Label" String="Short Description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Short Text for Fixed Values"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/CharcDescription">
+                <Annotation Term="SAP__common.Label" String="Characteristic Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_ChangeDocumentType/StatusName">
+                <Annotation Term="SAP__common.Label" String="Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Individual Status of an Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTROperationControl/createAuditDoc">
+                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
