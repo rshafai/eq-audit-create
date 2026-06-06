@@ -142,6 +142,15 @@
           }
         }
       }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt"
+          }
+        }
+      }
     }
   },
   "sap.fiori": {
