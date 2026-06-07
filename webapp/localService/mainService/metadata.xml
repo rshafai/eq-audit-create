@@ -102,6 +102,7 @@
                 <Property Name="StatusCriticality" Type="Edm.Byte" Nullable="false"/>
                 <Property Name="StatusProfile" Type="Edm.String" Nullable="false" MaxLength="8"/>
                 <Property Name="EquipmentImageUrl" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="NewAuditDocId" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.EntityControl"/>
                 <Property Name="__OperationControl" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTROperationControl"/>
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.SAP__Message)" Nullable="false"/>
@@ -164,12 +165,11 @@
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
             </Action>
-            <Action Name="CreateAudit" IsBound="true">
+            <Action Name="CreateAudit" EntitySetPath="_it" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
-                <Parameter Name="MaintPlant" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Parameter Name="AssetLocation" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Parameter Name="AssignedAuditor" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Parameter Name="AuditTitle" Type="Edm.String" Nullable="false" MaxLength="200"/>
+                <Parameter Name="AssignedAuditor" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <ReturnType Type="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="ZQMM_C_Equip_BarcodeTR" EntityType="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ZQMM_C_Equip_BarcodeTRType">
@@ -403,6 +403,10 @@
                 <Annotation Term="SAP__common.Label" String="Status Profile"/>
                 <Annotation Term="SAP__common.Heading" String="StatProf"/>
             </Annotations>
+            <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/NewAuditDocId">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
             <Annotations Target="SAP__self.ZQMM_C_Equip_BarcodeTRType/__EntityControl">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__UI.HiddenFilter"/>
@@ -495,39 +499,15 @@
             <Annotations Target="SAP__self.ViewAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/ViewAudit"/>
             </Annotations>
-            <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)/MaintPlant">
-                <Annotation Term="SAP__common.Label" String="Maintenance Plant"/>
-                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/i_plant/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ae-zqmm_c_equip_barcodetr.createaudit.maintplant.ZQMM_C_Equip_BarcodeTRType'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Plnt"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Maintenance Plant"/>
-            </Annotations>
-            <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)/AssetLocation">
-                <Annotation Term="SAP__common.Label" String="Location"/>
-                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/zqmm_i_location/0001;ps='srvd-zqmm_ui_eq_barcode-0001';va='com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.ae-zqmm_c_equip_barcodetr.createaudit.assetlocation.ZQMM_C_Equip_BarcodeTRType'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Location"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Asset location"/>
-            </Annotations>
-            <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)/AssignedAuditor">
-                <Annotation Term="SAP__common.Label" String="Assign Auditor"/>
-                <Annotation Term="SAP__core.OptionalParameter"/>
-                <Annotation Term="SAP__common.Heading" String="User Name"/>
-                <Annotation Term="SAP__common.QuickInfo" String="User Name"/>
-            </Annotations>
             <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)/AuditTitle">
-                <Annotation Term="SAP__common.Label" String="Description"/>
-                <Annotation Term="SAP__core.OptionalParameter"/>
+                <Annotation Term="SAP__common.Label" String="Audit Description"/>
                 <Annotation Term="SAP__common.Heading" String="Title"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Equipment Audit Title"/>
+            </Annotations>
+            <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)/AssignedAuditor">
+                <Annotation Term="SAP__common.Label" String="Assign Auditor (Optional)"/>
+                <Annotation Term="SAP__common.Heading" String="User Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="User Name"/>
             </Annotations>
             <Annotations Target="SAP__self.CreateAudit(SAP__self.ZQMM_C_Equip_BarcodeTRType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/CreateAudit"/>
@@ -555,25 +535,6 @@
                         <PropertyValue Property="Criticality" Path="StatusCriticality"/>
                         <PropertyValue Property="CriticalityRepresentation" EnumMember="SAP__UI.CriticalityRepresentationType/WithoutIcon"/>
                     </Record>
-                </Annotation>
-                <Annotation Term="SAP__UI.HeaderFacets">
-                    <Collection>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#fgHeaderEquip"/>
-                        </Record>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="ID" String="idHeadStatus"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpStatus"/>
-                        </Record>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="ID" String="idHeadAcDate"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcDate"/>
-                        </Record>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="ID" String="idHeadAcValue"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcValue"/>
-                        </Record>
-                    </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
@@ -606,6 +567,25 @@
                             <PropertyValue Property="ID" String="AuditHistoryTable"/>
                             <PropertyValue Property="Target" AnnotationPath="_ChangeDoc/@SAP__UI.LineItem"/>
                             <Annotation Term="SAP__UI.PartOfPreview" Bool="true"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#fgHeaderEquip"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadStatus"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpStatus"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadAcDate"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="idHeadAcValue"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.DataPoint#dpAcValue"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -769,11 +749,33 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="SAP__common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="Equipment"/>
+                                    <PropertyValue Property="Descending" Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequestAtLeast">
+                            <Collection>
+                                <PropertyPath>Location</PropertyPath>
+                                <PropertyPath>MaintPlant</PropertyPath>
+                                <PropertyPath>NewAuditDocId</PropertyPath>
+                                <PropertyPath>EquipmentName</PropertyPath>
+                                <PropertyPath>EquipmentTrim</PropertyPath>
+                                <PropertyPath>Equipment</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
                         <PropertyPath>EquipmentTrim</PropertyPath>
-                        <PropertyPath>Location</PropertyPath>
                         <PropertyPath>MaintPlant</PropertyPath>
+                        <PropertyPath>Location</PropertyPath>
                         <PropertyPath>EquipmentCategory</PropertyPath>
                         <PropertyPath>CostCenter</PropertyPath>
                         <PropertyPath>AcquisitionDate</PropertyPath>

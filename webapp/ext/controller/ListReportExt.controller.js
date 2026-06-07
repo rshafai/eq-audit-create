@@ -2,6 +2,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 	'use strict';
 
 	return ControllerExtension.extend('gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt', {
+		_bFilterInitialized: false,
 		// this section allows to extend lifecycle hooks or hooks provided by Fiori elements
 		override: {
 			/**
@@ -32,12 +33,114 @@ debugger;
 
 			},
 
+			onPageReady: function () {
+debugger;
+				const oFilterBar = this.base.getView().byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar");
+				//fe::table::ZQMM_C_Audit_Header::LineItem
+				//gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR::FilterField::EquipmentTrim-label
+				if (!oFilterBar) { return; }
+
+				// 1. Get the current logged-in Username dynamically
+				const sUsername = sap.ushell.Container.getService("UserInfo").getId(); 
+				
+				// 2. Calculate your dynamic logic based on username
+				let sDefaultValue = "";
+				if (sUsername.startsWith("DEV")) {
+					sDefaultValue = "DEVELOPER_PLANT";
+				} else {
+					sDefaultValue = "STANDARD_PLANT";
+				}
+
+				// 3. Set the filter value using the OData V4 FilterBar control API
+				oFilterBar.setFilterValues("YourFieldName", "EEQ", sDefaultValue);
+			},
+
 			onAfterRendering: function (oEvent) {
 				var oModel = this.base.getExtensionAPI().getModel();
 				if (oModel){
 					this._attachMessageListener(oModel);
 				}
+debugger;
+				//Default values for filterbar  (onPageReady does not trigger in our version 1.120.32)
+				if (this._bFilterInitialized) { return; }
+
+                const oView = this.base.getView(); 
+                const oFilterBar = oView.byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR");
+
+                if (oFilterBar) {
+                    // Modern sap.fe FilterBars expose a Promise indicating they are ready
+                    oFilterBar.waitForInitialization().then(function () {
+                        if (this._bFilterInitialized) { return; }
+
+						const sUsername = sap.ushell.Container.getService("UserInfo").getId();
+                        let sDefaultValue = sUsername.startsWith("DEFAULT") ? "0011" : "0012";
+						const oConditions = oFilterBar.getConditions() || {};
+
+						const oConditionModel = (typeof oFilterBar._getConditionModel === "function") 
+												? oFilterBar._getConditionModel() 
+												: oFilterBar.getModel("conditions"); // Alternate V4 model path
+						if (oConditionModel) {
+							oConditions["MaintPlant"] = [
+								{
+									operator: "EQ",
+									values: [sDefaultValue],
+									validated: "Validated"
+								}
+							];
+							oConditionModel.setConditions({
+								"MaintPlant": [
+									{ operator: "EQ", values: [sDefaultValue] },
+									{ operator: "EQ", values: ["0014"] }
+								]
+							});
+							// oFilterBar.setFilterValues("MaintPlant", "EEQ", sDefaultValue); // "EEQ" stands for 'Equal to' condition in V4
+							this._bFilterInitialized = true;
+						}
+                    }.bind(this));
+                }
+			},  //onAfterRendering
+
+			_onFilterModelChange: function (oConditionModel, oEvent) {
+				//--- To set dependent filter values
+debugger;
+				return;
+
+				// Path structure in the condition model is usually "/conditions/FieldName"
+				const sPath = oEvent.getParameter("path");
+				
+				if (sPath.includes("MaintPlant")) {
+					// Grab the current conditions for MaintPlant
+					const aPlantConditions = oConditionModel.getConditions("MaintPlant") || [];
+					
+					// Extract the plant value safely if it exists
+					const sCurrentPlant = (aPlantConditions.length > 0 && aPlantConditions[0].values) 
+						? aPlantConditions[0].values[0] 
+						: null;
+	
+					// Determine the new Location based on the Plant value
+					let sNewLocation = "";
+					if (sCurrentPlant === "0012") {
+						sNewLocation = "LOC_A"; // Replace with your real business logic
+					} else if (sCurrentPlant === "0014") {
+						sNewLocation = "LOC_B";
+					}
+	
+					// Fetch all current conditions to avoid erasing other independent filters
+					const oAllConditions = oConditionModel.getConditions() || {};
+	
+					if (sNewLocation) {
+						// Update or add the Location condition
+						oAllConditions["Location"] = [{ operator: "EQ", values: [sNewLocation] }];
+					} else {
+						// If the plant was cleared, clear the location as well
+						delete oAllConditions["Location"];
+					}
+	
+					// Push the updated map back into the model to refresh the UI
+					oConditionModel.setConditions(oAllConditions);
+				}
 			},
+		
 
 
 			editFlow: {
