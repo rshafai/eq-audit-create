@@ -34,7 +34,27 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "display-custom-rap-app": {
+          "semanticObject": "EquipAudit", 
+          "action": "create",
+          "signature": {
+            "parameters": {
+              "CompanyCode": {
+                "defaultValue": {
+                  "value": "%%UserDefault.CompanyCode%%",
+                  "format": "plain"
+                }
+              }
+            },
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
+    
   },
   "sap.ui": {
     "technology": "UI5",

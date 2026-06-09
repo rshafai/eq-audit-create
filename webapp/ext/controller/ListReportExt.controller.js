@@ -11,7 +11,6 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
              * @memberOf gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt
              */
 			onInit: function () {
-debugger;
 				// if (sap.m.MessageBox) {
 				// 	var fnOriginalError = sap.m.MessageBox.error;
 
@@ -34,7 +33,8 @@ debugger;
 			},
 
 			onPageReady: function () {
-debugger;
+				//--- onPageReady does not get triggered in our version
+				//---
 				const oFilterBar = this.base.getView().byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar");
 				//fe::table::ZQMM_C_Audit_Header::LineItem
 				//gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR::FilterField::EquipmentTrim-label
@@ -68,30 +68,38 @@ debugger;
                 const oFilterBar = oView.byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR");
 
                 if (oFilterBar) {
-                    // Modern sap.fe FilterBars expose a Promise indicating they are ready
                     oFilterBar.waitForInitialization().then(function () {
                         if (this._bFilterInitialized) { return; }
-
+						//----
+						// Make Company Code read-only
+						//----
+						var aFilterItems = oFilterBar.getFilterItems(); 
+                        var oTargetField = aFilterItems.find(function (oItem) {
+                            return oItem.getFieldPath() === "CompanyCode";
+                        });
+                        if (oTargetField) {
+                            oTargetField.setEditMode("ReadOnly"); 
+                            // Alternatively, you can use: oTargetField.setEditable(false);
+                        }
+						//----
+						// Default values 
+						//----
 						const sUsername = sap.ushell.Container.getService("UserInfo").getId();
-                        let sDefaultValue = sUsername.startsWith("DEFAULT") ? "0011" : "0012";
+						let sMaintPlant = "";
+						let sLocation = "";
+						if ( sUsername.startsWith("DEFAULT") || sUsername.startsWith("SHAFAIR") ){
+							sMaintPlant = "0240";
+							sLocation = "01965";
+						}
 						const oConditions = oFilterBar.getConditions() || {};
-
 						const oConditionModel = (typeof oFilterBar._getConditionModel === "function") 
 												? oFilterBar._getConditionModel() 
 												: oFilterBar.getModel("conditions"); // Alternate V4 model path
-						if (oConditionModel) {
-							oConditions["MaintPlant"] = [
-								{
-									operator: "EQ",
-									values: [sDefaultValue],
-									validated: "Validated"
-								}
-							];
+						if (oConditionModel) { 
+							//oConditions["MaintPlant"] = [{ operator: "EQ", values: [sMaintPlant], validated: "Validated" }];
 							oConditionModel.setConditions({
-								"MaintPlant": [
-									{ operator: "EQ", values: [sDefaultValue] },
-									{ operator: "EQ", values: ["0014"] }
-								]
+								"MaintPlant": [{ operator: "EQ", values: [sMaintPlant] }],
+								"Location": [{ operator: "EQ", values: [sLocation] }]
 							});
 							// oFilterBar.setFilterValues("MaintPlant", "EEQ", sDefaultValue); // "EEQ" stands for 'Equal to' condition in V4
 							this._bFilterInitialized = true;
@@ -100,47 +108,7 @@ debugger;
                 }
 			},  //onAfterRendering
 
-			_onFilterModelChange: function (oConditionModel, oEvent) {
-				//--- To set dependent filter values
-debugger;
-				return;
-
-				// Path structure in the condition model is usually "/conditions/FieldName"
-				const sPath = oEvent.getParameter("path");
-				
-				if (sPath.includes("MaintPlant")) {
-					// Grab the current conditions for MaintPlant
-					const aPlantConditions = oConditionModel.getConditions("MaintPlant") || [];
-					
-					// Extract the plant value safely if it exists
-					const sCurrentPlant = (aPlantConditions.length > 0 && aPlantConditions[0].values) 
-						? aPlantConditions[0].values[0] 
-						: null;
-	
-					// Determine the new Location based on the Plant value
-					let sNewLocation = "";
-					if (sCurrentPlant === "0012") {
-						sNewLocation = "LOC_A"; // Replace with your real business logic
-					} else if (sCurrentPlant === "0014") {
-						sNewLocation = "LOC_B";
-					}
-	
-					// Fetch all current conditions to avoid erasing other independent filters
-					const oAllConditions = oConditionModel.getConditions() || {};
-	
-					if (sNewLocation) {
-						// Update or add the Location condition
-						oAllConditions["Location"] = [{ operator: "EQ", values: [sNewLocation] }];
-					} else {
-						// If the plant was cleared, clear the location as well
-						delete oAllConditions["Location"];
-					}
-	
-					// Push the updated map back into the model to refresh the UI
-					oConditionModel.setConditions(oAllConditions);
-				}
-			},
-		
+			
 
 
 			editFlow: {
@@ -187,69 +155,6 @@ debugger;
 					}
 				}
 
-
-                        
-// // 1. Access the global Message Manager
-//                         var oMessageManager = sap.ui.getCore().getMessageManager();
-//                         var aMessages = oMessageManager.getMessageModel().getData();
-//                         var sNewAuditId = "";
-
-//                         // 2. Scan the backend messages for your Audit string
-//                         for (var i = 0; i < aMessages.length; i++) {
-//                             var sMessageText = aMessages[i].message;
-//                             if (sMessageText && sMessageText.includes("Audit created successfully:")) {
-//                                 // Extract the ID number from the end of your string
-//                                 sNewAuditId = sMessageText.split(": ")[1];
-//                                 break;
-//                             }
-//                         }
-
-
-					// 	// 2. Access the Extension API
-                    //     var oExtensionAPI = this.base.getExtensionAPI();
-                        
-                    //     // 3. Get the selected context from the table rows
-                    //     var aSelectedContexts = oExtensionAPI.getSelectedContexts();
-                        
-                    //     if (aSelectedContexts && aSelectedContexts.length > 0) {
-                    //         // Read the transient property from the first selected row context
-                    //         // (Ensure your backend maps NewAuditID to the result structure)
-                    //         var sNewAuditId = aSelectedContexts[0].getProperty("NewAuditDocId");
-                            
-                    //         if (sNewAuditId) {
-
-					// 			// 2. Access the Cross-Application Navigation Service from the Launchpad Container
-                    //             var oCrossAppNav = sap.ushell && sap.ushell.Container && 
-                    //                                sap.ushell.Container.getService("CrossApplicationNavigation");
-                                
-                    //             if (oCrossAppNav) {
-                    //                 // 3. Trigger intent-based navigation
-                    //                 oCrossAppNav.toExternal({
-                    //                     target: {
-                    //                         semanticObject: "AuditHeader", // Replace with your target app's Semantic Object
-                    //                         action: "display"              // Replace with your target app's Action
-                    //                     },
-                    //                     params: {
-                    //                         "AuditDocId": sNewAuditId         // Pass the key to the target app
-                    //                     }
-                    //                 });
-                    //             } else {
-                    //                 console.error("Fiori Launchpad CrossApplicationNavigation service not available.");
-                    //             }
-
-					// 			// // 4. Get the Navigation Controller
-                    //             // var oNavigationController = oExtensionAPI.getNavigationController();
-                                
-                    //             // // 5. Route to the Audit Header Object Page
-                    //             // oNavigationController.navigateInternal("ZQMM_C_Audit_Header", {
-                    //             //     keys: {
-                    //             //         AuditID: sNewAuditId
-                    //             //     }
-                    //             // });
-                    //         }
-                    //     }
-                    // }
-                // }
             }
         }, //override
 		_attachMessageListener: function(oModel){
