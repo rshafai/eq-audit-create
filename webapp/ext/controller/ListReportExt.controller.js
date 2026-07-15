@@ -112,8 +112,7 @@ debugger;
 
 
 			editFlow: {
-				onBeforeActionExecution: function (oEvent) {
-debugger;                    
+				onBeforeActionExecution: function (oEvent) {                
                     // if (oEvent.getParameter("actionName") && oEvent.getParameter("actionName").endsWith('CreateAudit')) {
                     //     // 1. Get the binding context of the first selected row
                     //     var aContexts = oEvent.getParameter("contexts");
@@ -161,7 +160,6 @@ debugger;
 				// 1. Get the new Audit Doc ID from the messages, so we can redirect to the Object page of AuditHeader
 				// 2. Supress duplicate success messages, we get one for each equipment added
 				oModel.attachMessageChange(function(oEvent) {
-debugger;
 					var oMessageManager = sap.ui.getCore().getMessageManager();
 					var aNewMessages = oEvent.getParameter("newMessages");
 					var aMessagesToRemove = [];

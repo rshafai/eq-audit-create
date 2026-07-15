@@ -8,8 +8,8 @@
     <edmx:DataServices> 
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local"> 
             
-            <!-- ADJUSTMENT: Target changed to point directly to the Entity Container and Set -->
-            <Annotations Target="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.Container/ZQMM_C_Equip_BarcodeTR"> 
+            
+            <!-- <Annotations Target="com.sap.gateway.srvd.zqmm_ui_eq_barcode.v0001.Container/ZQMM_C_Equip_BarcodeTR"> 
                 <Annotation Term="Capabilities.FilterRestrictions"> 
                     <Record> 
                         <PropertyValue Property="RequiresFilter" Bool="true"/> 
@@ -21,7 +21,7 @@
                         </PropertyValue> 
                     </Record> 
                 </Annotation> 
-            </Annotations> 
+            </Annotations>  -->
             
         </Schema> 
     </edmx:DataServices> 
