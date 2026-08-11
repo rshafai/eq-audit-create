@@ -3,32 +3,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 	return ControllerExtension.extend('gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt', {
 		_bFilterInitialized: false,
-		// this section allows to extend lifecycle hooks or hooks provided by Fiori elements
+
 		override: {
-			/**
-             * Called when a controller is instantiated and its View controls (if available) are already created.
-             * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-             * @memberOf gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt
-             */
 			onInit: function () {
-				
 			},
 
 			onPageReady: function () {
 				//--- onPageReady does not get triggered in our version
-				//---
-				const oFilterBar = this.base.getView().byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar");
-				if (!oFilterBar) { return; }
-
-				const sUsername = sap.ushell.Container.getService("UserInfo").getId(); 
-				
-				let sDefaultValue = "";
-				if (sUsername.startsWith("DEV")) {
-					sDefaultValue = "DEVELOPER_PLANT";
-				} else {
-					sDefaultValue = "STANDARD_PLANT";
-				}
-				oFilterBar.setFilterValues("YourFieldName", "EEQ", sDefaultValue);
 			},
 
 			onAfterRendering: function (oEvent) {
@@ -67,7 +48,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 							sLocation = "01965";
 						}
 						const oConditions = oFilterBar.getConditions() || {};
-						const oConditionModel = (typeof oFilterBar._getConditionModel === "function") 
+						const oConditionModel = (typeof oFilterBar._getConditionModel === "function")  
 												? oFilterBar._getConditionModel() 
 												: oFilterBar.getModel("conditions"); // Alternate V4 model path
 						if (oConditionModel) { 
@@ -90,8 +71,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
                     
                 },
                 onAfterActionExecution: function (sActionName, mParameters) {
- debugger;
-                    if (sActionName && sActionName.endsWith("CreateAudit")) {
+                     if (sActionName && sActionName.endsWith("CreateAudit")) {
 
 						// OData V4 actions pass an array of bound contexts that were processed
                         var aActionContexts = mParameters && mParameters.actionContexts;
