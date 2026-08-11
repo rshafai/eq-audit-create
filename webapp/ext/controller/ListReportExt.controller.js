@@ -63,9 +63,6 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
                 }
 			},  
 
-			
-
-
 			editFlow: {
 				onBeforeActionExecution: function (oEvent) {                
                     
@@ -135,8 +132,6 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 									console.error("Fiori Launchpad CrossApplicationNavigation service not available.");
 							}
 						}
-                        
-
 					}
 				});
 		},
