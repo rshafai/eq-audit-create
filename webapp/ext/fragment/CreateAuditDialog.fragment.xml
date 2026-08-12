@@ -1,0 +1,57 @@
+<!-- z/barcode/ext/fragment/CreateAuditDialog.fragment.xml -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+  <Dialog
+    id="createAuditDialog"
+    title="Create New Audit"
+    contentWidth="40rem">
+    <content>
+      <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+        <f:content>
+          <Label text="Audit Title" />
+          <Input
+            value="{dlg>/auditTitle}"
+            placeholder="Enter audit title"
+            width="100%" />
+
+          <Label text="Maintenance Plant" />
+          <Input
+            value="{dlg>/maintPlant}"
+            showValueHelp="true"
+            valueHelpRequest=".onMaintPlantVH"
+            placeholder="Plant" />
+
+          <Label text="Asset Location" />
+          <Input
+            value="{dlg>/assetLocation}"
+            placeholder="Asset Location" />
+
+          <Label text="Asset Room" />
+          <Input
+            value="{dlg>/assetRoom}"
+            placeholder="Asset Room" />
+
+          <Label text="Functional Location" />
+          <Input
+            value="{dlg>/functionalLocation}"
+            showValueHelp="true"
+            valueHelpRequest=".onFLocVH"
+            placeholder="Functional Location" />
+
+          <Label text="Selected Equipment" />
+          <Text text="{dlg>/equipmentCount} equipment item(s) selected" />
+        </f:content>
+      </f:SimpleForm>
+    </content>
+    <beginButton>
+      <Button
+        text="Create Audit"
+        type="Emphasized"
+        press=".onConfirmCreateAudit" />
+    </beginButton>
+    <endButton>
+      <Button
+        text="Cancel"
+        press=".onCancelCreateAudit" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>
