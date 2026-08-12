@@ -1,0 +1,18 @@
+<!-- your/namespace/fragment/AuditLockIndicator.fragment.xml -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+
+  <!-- <ObjectStatus
+    icon="{= ${LatestAuditEditable} ? 'sap-icon://locked' : '' }"
+    state="{= ${LatestAuditEditable} ? 'Error' : 'None' }"
+    visible="{LatestAuditEditable}"
+    tooltip="{= ${LatestAuditEditable} ? 'Already in Audit: ' + ${LatestAuditDocId} : '' }"
+  /> -->
+
+  <core:Icon
+    src="sap-icon://locked"
+    color="#BB0000"
+    visible="{LatestAuditEditable}"
+    tooltip="{= ${AuditLockStatus}  ? 'Already in Audit: ' + ${LatestAuditDocId} : '' }"
+    size="1rem" />
+
+</core:FragmentDefinition>

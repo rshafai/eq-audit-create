@@ -152,6 +152,18 @@
                       "requiresSelection": false,
                       "enabled": true
                     }
+                  },
+                  "columns": {
+                    "CustomMarkerColumn": {
+                      "header": "",
+                      "horizontalAlignment": "Center",
+                      "width": "2.5rem",
+                      "template": "gc.agr.aafc.mm.eqauditcreate.ext.fragment.AuditLockIndicator",
+                      "position": {
+                        "placement": "Before",
+                        "anchor": "DataField::Equipment"
+                      }
+                    }
                   }
                 }
               }
