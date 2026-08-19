@@ -12,7 +12,7 @@
     src="sap-icon://locked"
     color="#BB0000"
     visible="{LatestAuditEditable}"
-    tooltip="{= ${AuditLockStatus}  ? 'Already in Audit: ' + ${LatestAuditDocId} : '' }"
+    tooltip="{= ${LatestAuditEditable}  ? 'Locked in Audit: ' + ${LatestAuditDocId} : '' }"
     size="1rem" />
 
 </core:FragmentDefinition>

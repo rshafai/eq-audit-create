@@ -147,8 +147,8 @@
                   },
                   "actions": {
                     "CreateAudit": {
-                      "press": ".extension.gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt.onCreateAudit",
-                      "text": "Create Audit",
+                      "press": ".extension.gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt.onQuickInspect",
+                      "text": "Quick Inspect",
                       "requiresSelection": false,
                       "enabled": true
                     }

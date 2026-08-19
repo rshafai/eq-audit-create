@@ -134,5 +134,9 @@ debugger;
 			});
 		},
 
+		onQuickInspect: function(oEvent){
+			
+		}
+
     });
 });
