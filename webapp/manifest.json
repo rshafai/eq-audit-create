@@ -33,6 +33,13 @@
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "auditHeaderService": {
+        "uri": "/sap/opu/odata4/sap/zqmm_ui_audit_header_v4/srvd/sap/zqmm_ui_audit_header/0001/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -100,6 +107,15 @@
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true
+        }
+      },
+      "auditModel": {
+        "dataSource": "auditHeaderService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true
         }
       },
       "@i18n": {

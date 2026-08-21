@@ -1,32 +1,60 @@
-<!-- z/barcode/ext/fragment/CreateAuditDialog.fragment.xml -->
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
   <Dialog
     id="createAuditDialog"
     title="Create New Audit"
     contentWidth="40rem">
     <content>
-      <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+      <f:SimpleForm 
+              editable="true" 
+              layout="ResponsiveGridLayout"
+              labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+              adjustLabelSpan="false"
+              emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+              columnsXL="1" columnsL="1" columnsM="1"
+              singleContainerFullSize="false">
         <f:content>
           <Label text="Audit Title" />
           <Input
             value="{dlg>/auditTitle}"
-            placeholder="Enter audit title"
+            placeholder="Enter a title for the new Audit"
+            required="true"
             width="100%" />
 
+          <Label text="Apply default values (below) automatically?"></Label>
+          <Switch 
+              state="{dlg>/applyDefaults}" 
+              customTextOn="Yes" 
+              customTextOff="No"
+              type="YesNo">
+              <layoutData>
+                  <f:GridElementData cells="2" />
+              </layoutData>
+          </Switch>
+          <!-- <SegmentedButton selectedKey="{dlg>/applyDefaults}" >
+              <items>
+                  <SegmentedButtonItem key="true" text="Yes" />
+                  <SegmentedButtonItem key="off" text="No" />
+              </items>
+          </SegmentedButton> -->
+
+          <core:Title text="Default Values" />
           <Label text="Maintenance Plant" />
           <Input
             value="{dlg>/maintPlant}"
             showValueHelp="true"
+            enabled="{dlg>/applyDefaults}"
             valueHelpRequest=".onMaintPlantVH"
             placeholder="Plant" />
 
           <Label text="Asset Location" />
           <Input
+            enabled="{dlg>/applyDefaults}"
             value="{dlg>/assetLocation}"
             placeholder="Asset Location" />
 
           <Label text="Asset Room" />
           <Input
+            enabled="{dlg>/applyDefaults}"
             value="{dlg>/assetRoom}"
             placeholder="Asset Room" />
 
@@ -34,6 +62,7 @@
           <Input
             value="{dlg>/functionalLocation}"
             showValueHelp="true"
+            enabled="{dlg>/applyDefaults}"
             valueHelpRequest=".onFLocVH"
             placeholder="Functional Location" />
 
