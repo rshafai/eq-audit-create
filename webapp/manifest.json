@@ -164,9 +164,16 @@
                   "actions": {
                     "CreateAudit": {
                       "press": ".extension.gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt.onQuickInspect",
-                      "text": "Quick Inspect",
+                      "text": "Create New Audit",
                       "requiresSelection": false,
                       "enabled": true
+                    },
+                    "BarcodeScan": {
+                      "press": ".extension.gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt.onBarcodeScan",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Scan & Search"
                     }
                   },
                   "columns": {

@@ -23,6 +23,9 @@ sap.ui.define([
 			onPageReady: function () {
 				//--- onPageReady does not get triggered in our version
 			},
+			onSearch: function(){
+
+			},
 
 			onAfterRendering: function (oEvent) {
 				var oModel = this.base.getExtensionAPI().getModel();
@@ -32,8 +35,7 @@ sap.ui.define([
 				//Default values for filterbar  (onPageReady does not trigger in our version 1.120.32)
 				if (this._bFilterInitialized) { return; }
 
-                const oView = this.base.getView(); 
-                const oFilterBar = oView.byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR");
+                const oFilterBar = this._getFilterBar();
 
                 if (oFilterBar) {
                     oFilterBar.waitForInitialization().then(function () {
@@ -63,7 +65,7 @@ sap.ui.define([
 						const oConditionModel = (typeof oFilterBar._getConditionModel === "function")  
 												? oFilterBar._getConditionModel() 
 												: oFilterBar.getModel("conditions"); // Alternate V4 model path
-						if (oConditionModel) { 
+						if (oConditionModel && sMaintPlant) { 
 							oConditionModel.setConditions({
 								"MaintPlant": [{ operator: "EQ", values: [sMaintPlant] }],
 								"Location": [{ operator: "EQ", values: [sLocation] }]
@@ -80,7 +82,6 @@ sap.ui.define([
                     
                 },
                 onAfterActionExecution: function (sActionName, mParameters) {
-debugger;
 					if (sActionName && sActionName.endsWith("CreateAudit")) {
 
 						// OData V4 actions pass an array of bound contexts that were processed
@@ -102,6 +103,7 @@ debugger;
 
             }
         }, //override
+
 	_attachMessageListener: function(oModel){
 		// 1. Get the new Audit Doc ID from the messages, so we can redirect to the Object page of AuditHeader
 		// 2. Supress duplicate success messages, we get one for each equipment added
@@ -157,11 +159,12 @@ debugger;
 		// build equipment list from selected contexts
 		let bOkay = true;
 		const aEquipmentNumbers = aSelectedContexts.map(oCtx => {
-			oCtx.getProperty("Equipment");
+			let sEquip = oCtx.getProperty("Equipment");
 			if (oCtx.getProperty("LatestAuditEditable")){
-				MessageBox.error("The equipment " + oCtx.getProperty("Equipment") + " is locked in the Audit document: " + oCtx.getProperty("LatestAuditDocId") );
+				MessageBox.error("The equipment " + sEquip + " is locked in the Audit document: " + oCtx.getProperty("LatestAuditDocId") );
 				bOkay = false;
 			}
+			return sEquip;
 		});
 		if (!bOkay) {return;}
 
@@ -272,45 +275,102 @@ debugger;
 			}
 		});
 	},
-
+	//────────────────────────────────────────
+	// Get Filterbar values 
+	//────────────────────────────────────────
 	_getFilterBarValues: function () {
-		const oResult = {};
-		try {
-			const sFilterBar = this.getView().getId() + "--fe::FilterBar::ZQMM_C_Equip_BarcodeTR";
-			const oFilterBar = this.getView().byId(sFilterBar);
+	  const oResult = {};
+	  try {
+		  const oFilterBar = _getFilterBar();
+		  if (!oFilterBar) { return oResult; }
 
-			if (!oFilterBar) { return oResult; }
+		  // get current filter conditions
+		  const oConditions = oFilterBar.getFilterConditions
+			  ? oFilterBar.getFilterConditions()
+			  : {};
 
-			// get current filter conditions
-			const oConditions = oFilterBar.getFilterConditions
-				? oFilterBar.getFilterConditions()
-				: {};
+		  // extract values for each relevant filter field
+		  // conditions are stored as arrays of condition objects
+		  const extractValue = (sField) => {
+			  const aConditions = oConditions[sField];
+			  if (aConditions && aConditions.length > 0) {
+				  // EQ condition has values[0] as the filter value
+				  const oFirstCondition = aConditions[0];
+				  if (oFirstCondition.values && oFirstCondition.values.length > 0) {
+					  return oFirstCondition.values[0];
+				  }
+			  }
+			  return "";
+		  };
+		  oResult.MaintPlant         = extractValue("MaintPlant");
+		  oResult.AssetLocation      = extractValue("Location");
+		  oResult.AssetRoom          = extractValue("AssetRoom");
+		  oResult.FunctionalLocation = extractValue("FunctionalLocation");
+		  //oResult.EquipmentTrip  	 = extractValue("EquipmentTrim");   //used by scan
 
-			// extract values for each relevant filter field
-			// conditions are stored as arrays of condition objects
-			const extractValue = (sField) => {
-				const aConditions = oConditions[sField];
-				if (aConditions && aConditions.length > 0) {
-					// EQ condition has values[0] as the filter value
-					const oFirstCondition = aConditions[0];
-					if (oFirstCondition.values && oFirstCondition.values.length > 0) {
-						return oFirstCondition.values[0];
-					}
-				}
-				return "";
-			};
-			oResult.MaintPlant         = extractValue("MaintPlant");
-			oResult.AssetLocation      = extractValue("Location");
-			oResult.AssetRoom          = extractValue("AssetRoom");
-			oResult.FunctionalLocation = extractValue("FunctionalLocation");
+	  } catch (e) {
+		  // filter bar access failed - return empty values
+		  console.warn("Could not read filter bar values:", e);
+	  }
+	  return oResult;
+  },
 
-		} catch (e) {
-			// filter bar access failed - return empty values
-			console.warn("Could not read filter bar values:", e);
-		}
-		return oResult;
+
+	//────────────────────────────────────────
+	// Barcode Scan 
+	//────────────────────────────────────────
+	onBarcodeScan: function (oEvent) {
+		  BarcodeScanner.scan(
+			function (mResult) {
+				console.log("We got a barcode\n" + "Result: " + mResult.text + "\n" + "Format: " + mResult.format + "\n" + "Cancelled: " + mResult.cancelled);
+				this._onScanSuccess(mResult);
+			}.bind(this),
+			function (Error) {
+				MessageBox.error("Scanning failed: " + Error);
+			},
+			function (mParams) {
+				//console.log("Value entered: " + mParams.newValue);
+			},
+			"Scan a barcode or type-in an equipment number to searh for",  //title
+			true,                       //preferFrontCamera
+			30,                         //frameRate
+			1,                          //zoom
+			false,                      //keepCameraScan
+			false                       //disableBarcodeInputDialog
+		);
 	},
+	
+	_onScanSuccess: function(mResult) {
+		if (mResult.cancelled) {
+			MessageToast.show("Scan cancelled", { duration:1000 });
+		} else {
+			var sBarcode = mResult.text; //oEvent.getParameter("text") || '';
 
+			const oFilterBar = this._getFilterBar();
+			let oConditions = oFilterBar.getFilterConditions ? oFilterBar.getFilterConditions() : {};
+			console.log(oConditions);
+			var oNewConditions = {
+				"Equipment": [
+					{
+						"operator": "EQ",       // Equal To
+						"values": [sBarcode],   // Your scanned barcode string
+						"validated": true       // Forces framework validation bypass
+					}
+				]
+			};		
+			const oConditionModel = (typeof oFilterBar._getConditionModel === "function")  
+									? oFilterBar._getConditionModel() 
+									: oFilterBar.getModel("conditions"); 
+			if (oConditionModel) { 
+				oConditionModel.setConditions(oNewConditions);
+				oFilterBar.triggerSearch();
+			}
+		}
+	},
+	
+	//────────────────────────────────────────
+	// External navigation 
+	//────────────────────────────────────────
 	_navigateToAuditHeader: function (sAuditDocId) {
 		// Same app, use router
 		// const oRouter = this.getOwnerComponent().getRouter();
@@ -320,7 +380,7 @@ debugger;
 
 		const oCrossAppNav = sap.ushell && sap.ushell.Container && sap.ushell.Container.getService("CrossApplicationNavigation");
 		if (oCrossAppNav) {
-			oCrossAppNav.toExternal({
+			oCrossAppNav.toExternal({	
 				target: { semanticObject: "EquipAudit", action: "display" },
 				params: { AuditDocId: sAuditDocId }
 			});
@@ -331,7 +391,27 @@ debugger;
 
 	onCancelCreateAudit: function () {
 		this._oCreateAuditDialog.close();
+	},
+
+	_getTable(bInner){
+		const oExtensionAPI = this.base.getExtensionAPI();
+		let sTableId = this.base.getView().getId() + "--fe::table::ZQMM_C_Equip_BarcodeTR::LineItem"; 
+
+		if (bInner) {
+		  sTableId += "-innerTable"
+		}
+		return this.base.byId(sTableId);
+    },
+	_getFilterBar: function(){
+		//ca.gc.agr.equipbcodelr::sap.suite.ui.generic.template.ListReport.view.ListReport::ZQMM_C_EQ_Barcode--listReportFilter"); 
+		//gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR
+		// const oView = this.base.getView(); 
+        // return oView.byId("gc.agr.aafc.mm.eqauditcreate::ZQMM_C_Equip_BarcodeTRList--fe::FilterBar::ZQMM_C_Equip_BarcodeTR");
+
+		const sFilterBar = this.getView().getId() + "--fe::FilterBar::ZQMM_C_Equip_BarcodeTR";
+		return this.getView().byId(sFilterBar);
 	}
+
 		  
 
     });
