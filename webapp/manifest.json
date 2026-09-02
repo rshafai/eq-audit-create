@@ -159,13 +159,15 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "selectionMode": "Multi",
+                    "selectAll": true
                   },
                   "actions": {
                     "CreateAudit": {
                       "press": ".extension.gc.agr.aafc.mm.eqauditcreate.ext.controller.ListReportExt.onQuickInspect",
                       "text": "Create New Audit",
-                      "requiresSelection": false,
+                      "requiresSelection":  false,
                       "enabled": true
                     },
                     "BarcodeScan": {
@@ -174,6 +176,12 @@
                       "enabled": true,
                       "requiresSelection": false,
                       "text": "Scan & Search"
+                    },
+                    "DummySelectionEnabler": {
+                      "text": "Hidden",
+                      "requiresSelection": true,
+                      "visible": false,
+                      "enabled": false
                     }
                   },
                   "columns": {
