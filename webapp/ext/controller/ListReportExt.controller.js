@@ -20,12 +20,11 @@ sap.ui.define([
 			onInit: function () {
 			},
 
-			onPageReady: function () {
-				//--- onPageReady does not get triggered in our version
-			},
-			onSearch: function(){
-
-			},
+			// onPageReady: function () {
+			// 	//--- onPageReady does not get triggered in our version
+			// },
+			// onSearch: function(){
+			// },
 
 			onAfterRendering: function (oEvent) {
 				var oModel = this.base.getExtensionAPI().getModel();
@@ -167,7 +166,7 @@ sap.ui.define([
 			return sEquip;
 		});
 		if (!bOkay) {return;}
-
+debugger;
 		// read current filter bar values to pre-fill the dialog
 		const oFilterValues = this._getFilterBarValues();
 
@@ -281,7 +280,7 @@ sap.ui.define([
 	_getFilterBarValues: function () {
 	  const oResult = {};
 	  try {
-		  const oFilterBar = _getFilterBar();
+		  const oFilterBar = this._getFilterBar();
 		  if (!oFilterBar) { return oResult; }
 
 		  // get current filter conditions
